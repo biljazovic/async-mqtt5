@@ -24,7 +24,7 @@ jobs:
             container: ubuntu:22.04
             cxxstd: 20
             build-type: 'Release'
-            cxxflags: '-std=c++20 -Wall -Wextra -fdeclspec'
+            cxxflags: '-Wall -Wextra -fdeclspec'
             ldflags: ''
 
     runs-on: ${{ matrix.os }}
