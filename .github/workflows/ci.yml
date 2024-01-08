@@ -17,56 +17,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - toolset: g++-11
-            compiler: g++-11
-            install: g++-11
-            os: ubuntu-latest
-            container: ubuntu:22.04
-            cxxstd: '17'
-            build-type: 'Release'
-            cxxflags: '-Wall -Wextra'
-            ldflags: ''
-
-          - toolset: g++-12
-            compiler: g++-12
-            install: g++-12
-            os: ubuntu-latest
-            container: ubuntu:22.04
-            cxxstd: '20'
-            build-type: 'Release'
-            cxxflags: '-Wall -Wextra'
-            ldflags: ''
-
-          - toolset: clang++-12
-            compiler: clang++-12
-            install: clang++-12
-            os: ubuntu-latest
-            container: ubuntu:22.04
-            cxxstd: '17'
-            build-type: 'Release'
-            cxxflags: '-Wall -Wextra -fdeclspec'
-            ldflags: ''
-
-          - toolset: clang++-14-libc++-14
-            compiler: clang++-14
-            install: 'clang++-14 libc++-14-dev libc++abi-14-dev'
-            os: ubuntu-latest
-            container: ubuntu:22.04
-            cxxstd: '17'
-            build-type: 'Release'
-            cxxflags: '-Wall -Wextra -stdlib=libc++'
-            ldflags: '-lc++'
-
-          - toolset: clang++-14-libc++-14
-            compiler: clang++-14
-            install: 'clang++-14 libc++-14-dev libc++abi-14-dev'
-            os: ubuntu-latest
-            container: ubuntu:22.04
-            cxxstd: '20'
-            build-type: 'Release'
-            cxxflags: '-Wall -Wextra -stdlib=libc++'
-            ldflags: '-lc++'
-
           - toolset: clang++-15
             compiler: clang++-15
             install: clang++-15
