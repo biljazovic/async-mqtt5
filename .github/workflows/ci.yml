@@ -22,9 +22,9 @@ jobs:
             install: clang++-15
             os: ubuntu-latest
             container: ubuntu:22.04
-            cxxstd: '20'
+            cxxstd: 20
             build-type: 'Release'
-            cxxflags: '-Wall -Wextra -fdeclspec'
+            cxxflags: '-std=c++20 -Wall -Wextra -fdeclspec'
             ldflags: ''
 
     runs-on: ${{ matrix.os }}
