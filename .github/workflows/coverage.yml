@@ -1,0 +1,90 @@
+#
+# Copyright (c) 2023-2024 Ivica Siladic, Bruno Iljazovic, Korina Simicevic
+#
+# Distributed under the Boost Software License, Version 1.0.
+# (See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt)
+#
+
+name: coverage
+
+on: [push, pull_request]
+
+env:
+  BOOST_VERSION: 1.82.0
+  BOOST_DIR_VER_NAME: 1_82_0
+
+jobs:
+  posix:
+    name: "coverage ${{ matrix.compiler }} -std=c++${{ matrix.cxxstd }} ${{ matrix.container }}"
+    defaults:
+      run:
+        shell: bash
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - toolset: coverage
+            compiler: g++-11
+            os: ubuntu-latest
+            container: ubuntu:22.04
+            cxxstd: 20
+            cxxflags: '-g -O0 -std=c++20 --coverage -fkeep-inline-functions -fkeep-static-functions'
+            ldflags: '--coverage'
+  
+    runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
+    env:
+      CMAKE_BUILD_PARALLEL_LEVEL: 4
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup container environment
+        if: matrix.container
+        run: |
+          apt-get update
+          apt-get -y install sudo wget tar cmake openssl libssl-dev pkg-config lcov gpg git
+
+      - name: Install compiler
+        run: sudo apt-get install -y ${{ matrix.compiler }}
+      
+      - name: Setup Boost
+        run: |
+          wget https://archives.boost.io/release/${{ env.BOOST_VERSION }}/source/boost_${{ env.BOOST_DIR_VER_NAME }}.tar.gz
+          tar xzf boost_${{ env.BOOST_DIR_VER_NAME }}.tar.gz
+          mkdir /usr/local/boost_${{ env.BOOST_DIR_VER_NAME }}
+          mv boost_${{ env.BOOST_DIR_VER_NAME }}/boost /usr/local/boost_${{ env.BOOST_DIR_VER_NAME }}
+          rm boost_${{ env.BOOST_DIR_VER_NAME }}.tar.gz
+
+      - name: Setup library
+        run: |
+          cmake -S . -B build -DCMAKE_CXX_COMPILER="${{ matrix.compiler }}" \
+          -DBoost_INCLUDE_DIR="/usr/local/boost_${{ env.BOOST_DIR_VER_NAME }}"
+          sudo cmake --install build
+
+      - name: Build tests
+        run: |
+          cmake -S test -B test/build -DCMAKE_CXX_COMPILER="${{ matrix.compiler }}" -DCMAKE_CXX_FLAGS="${{ matrix.cxxflags }}" \
+          -DCMAKE_EXE_LINKER_FLAGS="${{ matrix.ldflags }}" -DCMAKE_BUILD_TYPE="Coverage" \
+          -DBoost_INCLUDE_DIR="/usr/local/boost_${{ env.BOOST_DIR_VER_NAME }}"
+          cmake --build test/build -j 4
+
+      - name: Run tests
+        run: ./test/build/mqtt-test
+
+      - name: Generate Coverage Report
+        run: |
+          lcov --capture --output-file coverage.info --directory test/build
+          lcov --extract coverage.info '**/boost/mqtt5/*' --output-file coverage.info
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          verbose: true
+          file: coverage.info
+          disable_search: true
+          fail_ci_if_error: true
+          plugin: noop
+          token: ${{ secrets.CODECOV_TOKEN }}
