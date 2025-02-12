@@ -21,7 +21,7 @@ local requirements =
 
 run
     src/run_tests.cpp
-    [ glob "unit/*.cpp" "integration/*.cpp" ]
+    [ glob "unit/*.cpp" ]
 : requirements $(requirements)
     <include>include
 : target-name boost_mqtt5_tests

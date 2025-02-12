@@ -14,10 +14,22 @@
 
 namespace boost::mqtt5::test {
 
+static std::string safe_getenv(const char* name) {
+#ifdef BOOST_MSVC
+#pragma warning(push)
+#pragma warning(disable : 4996) // MSVC doesn't like getenv
+#endif
+    const char* res = std::getenv(name);
+#ifdef BOOST_MSVC
+#pragma warning(pop)
+#endif
+    return res ? res : "";
+}
+
 struct env_condition {
     std::string env;
     boost::test_tools::assertion_result operator()(boost::unit_test::test_unit_id) {
-        return (bool)(std::getenv(env.c_str()));
+        return !safe_getenv(env.c_str()).empty();
     }
 };
 static const env_condition public_broker_cond =
