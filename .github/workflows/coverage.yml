@@ -45,7 +45,8 @@ jobs:
         run: |
           apt-get update
           apt-get -y install --no-install-recommends \
-            sudo git g++ cmake make openssl libssl-dev ca-certificates pkg-config python3 lcov gpg
+            sudo git g++ cmake make openssl libssl-dev ca-certificates pkg-config \
+            python3 lcov gpg gpg-agent
 
       - name: Install compiler
         run: sudo apt-get install -y ${{ matrix.install }}
