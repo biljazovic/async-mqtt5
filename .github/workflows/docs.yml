@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2023-2025 Ivica Siladic, Bruno Iljazovic, Korina Simicevic
+# Copyright (c) 2025 Ivica Siladic, Bruno Iljazovic, Korina Simicevic
 #
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -12,7 +12,7 @@ on: [push]
 jobs:
 
   posix:
-    name: "Docs"
+    name: "Docs ${{ matrix.container }}"
 
     runs-on: ubuntu-latest
     container: ubuntu:22.04
@@ -26,7 +26,6 @@ jobs:
 
       - name: Setup container environment
         run: |
-          ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
           apt-get update
           apt-get -y install --no-install-recommends \
             doxygen docbook-xsl docutils-doc xsltproc wget ca-certificates g++ \

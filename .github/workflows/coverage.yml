@@ -70,7 +70,8 @@ jobs:
 
       - name: Generate Coverage Report
         run: |
-          lcov --capture --output-file coverage.info --directory ~/boost-root/libs/mqtt5/__build_standalone_tests__/test
+          lcov --capture --output-file coverage.info \
+            --directory ~/boost-root/libs/mqtt5/__build_standalone_tests__/test
           lcov --extract coverage.info '**/boost/mqtt5/*' --output-file coverage.info
 
       - name: Upload coverage reports to Codecov
@@ -82,3 +83,4 @@ jobs:
           fail_ci_if_error: true
           plugin: noop
           token: ${{ secrets.CODECOV_TOKEN }}
+          slug: biljazovic/async-mqtt5

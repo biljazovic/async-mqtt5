@@ -126,8 +126,6 @@ def _setup_boost(
     # Install Boost dependencies
     _run(["git", "config", "submodule.fetchJobs", "8"])
     _run(["git", "submodule", "update", "-q", "--init"] + submodules)
-    _run(["git", "config", "submodule.fetchJobs", "8"])
-    _run(["git", "submodule", "update", "-q", "--init", "tools/boostdep"])
     if docs_install:
         _run(['python3', 'tools/boostdep/depinst/depinst.py', '../tools/quickbook'])
     else:

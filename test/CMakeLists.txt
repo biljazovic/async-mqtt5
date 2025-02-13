@@ -8,7 +8,7 @@
 project(boost_mqtt5_tests CXX)
 
 # file(GLOB integration_tests "integration/*.cpp")
-file(GLOB unit_tests "unit/logger.cpp")
+file(GLOB unit_tests "unit/error.cpp")
 
 add_executable(mqtt-test src/run_tests.cpp ${integration_tests} ${unit_tests})
 
