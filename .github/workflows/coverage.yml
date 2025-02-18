@@ -82,3 +82,4 @@ jobs:
           disable_search: true
           fail_ci_if_error: true
           plugin: noop
+          token: ${{ secrets.CODECOV_TOKEN }}
