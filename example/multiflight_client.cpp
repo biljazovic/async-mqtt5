@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2024 Ivica Siladic, Bruno Iljazovic, Korina Simicevic
+// Copyright (c) 2023-2025 Ivica Siladic, Bruno Iljazovic, Korina Simicevic
 //
 // Distributed under the Boost Software License, Version 1.0.
 // (See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -22,7 +22,7 @@
 struct config {
     std::string brokers = "broker.hivemq.com";
     uint16_t port = 1883;
-    std::string client_id = "async_mqtt5_tester";
+    std::string client_id = "boost_mqtt5_tester";
 };
 
 int main(int argc, char** argv) {
@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
     // of the previous async_publish call to be invoked.
     for (auto i = 1; i <= 5; ++i)
         client.async_publish<boost::mqtt5::qos_e::exactly_once>(
-            "async-mqtt5/test", "Hello world!",
+            "boost-mqtt5/test", "Hello world!",
             boost::mqtt5::retain_e::no, boost::mqtt5::publish_props {},
             [i](boost::mqtt5::error_code ec, boost::mqtt5::reason_code rc, boost::mqtt5::pubcomp_props) {
                 std::cout << "Publish number " << i << " completed with: " << std::endl;

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2024 Ivica Siladic, Bruno Iljazovic, Korina Simicevic
+// Copyright (c) 2023-2025 Ivica Siladic, Bruno Iljazovic, Korina Simicevic
 //
 // Distributed under the Boost Software License, Version 1.0.
 // (See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -29,7 +29,7 @@
 struct config {
     std::string brokers = "broker.hivemq.com";
     uint16_t port = 1883;
-    std::string client_id = "async_mqtt5_tester";
+    std::string client_id = "boost_mqtt5_tester";
 };
 
 // Modified completion token that will prevent co_await from throwing exceptions.

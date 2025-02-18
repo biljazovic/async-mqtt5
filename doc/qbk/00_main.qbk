@@ -1,12 +1,12 @@
 [/
-    Copyright (c) 2023-2024 Ivica Siladic, Bruno Iljazovic, Korina Simicevic
+    Copyright (c) 2023-2025 Ivica Siladic, Bruno Iljazovic, Korina Simicevic
     Distributed under the Boost Software License, Version 1.0.
     (See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt)
 ]
 
 [library Boost.MQTT5: a C++17 MQTT client
     [quickbook 1.7]
-    [copyright 2023-2024 Mireo]
+    [copyright 2023-2025 Mireo]
     [id mqtt5]
     [purpose C++17 MQTT client]
     [license
@@ -22,12 +22,12 @@
 [template nochunk[] [block '''<?dbhtml stop-chunking?>''']]
 [template mdash[] '''&mdash; ''']
 [template hr[] '''<phrase role="silver">'''[mdash]'''</phrase>''']
-[template link_to_file[path][^'''<ulink url="https://github.com/mireo/async_mqtt5/blob/master/'''[path]'''">'''[path]'''</ulink>''']]
-[template include_file[path][^<'''<ulink url="https://github.com/mireo/async_mqtt5/blob/master/include/'''[path]'''">'''[path]'''</ulink>'''>]]
+[template link_to_file[path][^'''<ulink url="https://github.com/boostorg/mqtt5/blob/master/'''[path]'''">'''[path]'''</ulink>''']]
+[template include_file[path][^<'''<ulink url="https://github.com/boostorg/mqtt5/blob/master/include/'''[path]'''">'''[path]'''</ulink>'''>]]
 [template indexterm1[term1] '''<indexterm><primary>'''[term1]'''</primary></indexterm>''']
 [template indexterm2[term1 term2] '''<indexterm><primary>'''[term1]'''</primary><secondary>'''[term2]'''</secondary></indexterm>''']
 
-[template ghreflink[path text] [@https://github.com/mireo/async-mqtt5/blob/master/[path] [text]]]
+[template ghreflink[path text] [@https://github.com/boostorg/mqtt5/blob/master/[path] [text]]]
 [template reflink2[id text][link mqtt5.ref.boost__mqtt5__[id] [^[text]]]]
 [template reflink[id text][link mqtt5.ref.[id] [text]]]
 [template refmem[class mem][reflink2 [class].[mem] [class]::[mem]]]

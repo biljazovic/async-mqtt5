@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2023-2024 Ivica Siladic, Bruno Iljazovic, Korina Simicevic
+// Copyright (c) 2023-2025 Ivica Siladic, Bruno Iljazovic, Korina Simicevic
 //
 // Distributed under the Boost Software License, Version 1.0.
 // (See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -31,7 +31,7 @@
 struct config {
     std::string brokers = "broker.hivemq.com";
     uint16_t port = 1883;
-    std::string client_id = "async_mqtt5_tester";
+    std::string client_id = "boost_mqtt5_tester";
 };
 
 // Modified completion token that will prevent co_await from throwing exceptions.
@@ -65,7 +65,7 @@ boost::asio::awaitable<void> publish_sensor_readings(
 
         // Publish the sensor reading with QoS 1.
         auto&& [ec, rc, props] = co_await client.async_publish<boost::mqtt5::qos_e::at_least_once>(
-            "async-mqtt5/test" /* topic */, reading /* payload */,
+            "boost-mqtt5/test" /* topic */, reading /* payload */,
             boost::mqtt5::retain_e::no, boost::mqtt5::publish_props {}, use_nothrow_awaitable
         );
         // An error can occur as a result of:

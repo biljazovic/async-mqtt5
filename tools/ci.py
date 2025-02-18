@@ -332,8 +332,7 @@ def _run_b2_tests(
     ])
 
 
-def _build_docs(
-):
+def _build_docs():
     os.chdir(str(_boost_root))
 
     # Write the config file
